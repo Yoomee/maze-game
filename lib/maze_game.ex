@@ -12,7 +12,7 @@ defmodule MazeGame do
       # Start the Ecto repository
       supervisor(MazeGame.Repo, []),
       # Here you could define other workers and supervisors as children
-      worker(MazeGame.Game, []),
+      worker(MazeGame.Manager, []),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
