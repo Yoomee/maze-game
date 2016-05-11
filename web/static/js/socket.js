@@ -4,6 +4,8 @@
 // To use Phoenix channels, the first step is to import Socket
 // and connect at the socket path in "lib/my_app/endpoint.ex":
 import {Socket} from "phoenix"
+import React from "react"
+import ReactDOM from "react-dom"
 import Maze from "./maze"
 
 let socket = new Socket("/socket", {params: {token: window.userToken}})
@@ -64,8 +66,13 @@ channel.join()
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 channel.on("maze", maze => {
-  let new_maze = new Maze(maze);
-  new_maze.draw()
+  let container = document.getElementById("maze-container");
+  ReactDOM.render(<Maze maze={maze.maze} />, container);
+});
+
+channel.on("player_update", maze => {
+  let container = document.getElementById("maze-container");
+  ReactDOM.render(<Maze maze={maze.maze} />, container);
 });
 
 export default socket
