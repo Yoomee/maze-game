@@ -61,7 +61,6 @@ window.channel = socket.channel("mazes:default", {})
 
 channel.join()
   .receive("ok", resp => {
-    console.log("Joined successfully", resp)
     channel.push("get_maze", {})
   })
   .receive("error", resp => { console.log("Unable to join", resp) })
