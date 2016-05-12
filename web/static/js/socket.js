@@ -57,7 +57,8 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("mazes:default", {name: "test"})
+window.channel = socket.channel("mazes:default", {})
+
 channel.join()
   .receive("ok", resp => {
     console.log("Joined successfully", resp)
