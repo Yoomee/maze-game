@@ -1,6 +1,7 @@
 defmodule MazeGame.Manager do
   def start_link do
-    Agent.start_link(fn -> %{} end, name: __MODULE__)
+    {ok, game} = MazeGame.Game.start_link
+    Agent.start_link(fn -> %{"default" => game} end, name: __MODULE__)
   end
 
   def new_game(name) do

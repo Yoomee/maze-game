@@ -17,6 +17,12 @@ class Row extends React.Component {
   }
 }
 
+class Player extends React.Component {
+  render() {
+    return <div>{`${this.props.name} - ${this.props.position}`}</div>
+  }
+}
+
 export default class Maze extends React.Component {
   constructor(props) {
     super(props);
@@ -25,8 +31,14 @@ export default class Maze extends React.Component {
     let maze = this.props.maze.map(row => {
       return <Row cells={row}></Row>
     });
-    console.log(maze);
-    return (<div>{maze}</div>);
+    console.log(this.props);
+    let players = this.props.players.map(player => <Player name={player[0]} position={player[1]}></Player>);
+    return (
+        <div>
+        <div>{maze}</div>
+        <div>{players}</div>
+        </div>
+        );
   }
 }
 

@@ -67,12 +67,13 @@ channel.join()
 
 channel.on("maze", maze => {
   let container = document.getElementById("maze-container");
-  ReactDOM.render(<Maze maze={maze.maze} />, container);
+  window.maze = maze.maze;
+  //ReactDOM.render(<Maze maze={maze.maze} />, container);
 });
 
-channel.on("player_update", maze => {
+channel.on("players", players => {
   let container = document.getElementById("maze-container");
-  ReactDOM.render(<Maze maze={maze.maze} />, container);
+  ReactDOM.render(<Maze maze={window.maze} players={players.players} />, container);
 });
 
 export default socket
