@@ -2,7 +2,7 @@ import React from "react";
 
 class Cell extends React.Component {
   render() {
-    let player_names = this.props.players.map(player => player.name);
+    let player_names = this.props.players.map(player => (<div className="player">{player.name}</div>));
     return <div className={`${this.props.cellType} cell`}>{player_names}</div>
   }
 }

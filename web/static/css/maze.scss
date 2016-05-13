@@ -3,3 +3,10 @@
 .start { background: hotpink }
 .finish { background: green }
 div,h1,h2,h3,p { font-family: 'Dosis', sans-serif; } 
+.player {
+  border: solid black 1px;
+  border-radius: 100%;
+  padding: 10px;
+  margin: 5px;
+  display: inline-block
+}
