@@ -14,8 +14,20 @@ defmodule MazeGame.MazeChannel do
     {:noreply, socket}
   end
 
-  def handle_in("move", %{"direction" => direction}, socket) do
-    broadcast! socket, "maze", %{"maze" => MazeGame.Game.initial_maze}
+  def handle_in("tick", _payload, socket) do
+    game = MazeGame.Manager.get_game(socket.assigns[:game])
+    MazeGame.Game.tick(game)
+    broadcast! socket, "maze", %{"maze" => MazeGame.Game.get_maze_with_players(game)}
+    broadcast! socket, "players", %{"players" => MazeGame.Game.get_players(game)}
+    broadcast! socket, "request_direction", %{}
+    {:noreply, socket}
+  end
+
+  def handle_in("direction", direction, socket) do
+    game = MazeGame.Manager.get_game(socket.assigns[:game])
+    if Map.has_key?(socket.assigns, :name) do
+      MazeGame.Game.update_player_direction(game, socket.assigns[:name], direction)
+    end
     {:noreply, socket}
   end
 

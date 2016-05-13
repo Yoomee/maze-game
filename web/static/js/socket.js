@@ -7,6 +7,7 @@ import {Socket} from "phoenix"
 import React from "react"
 import ReactDOM from "react-dom"
 import Maze from "./maze"
+import _ from "lodash"
 
 let socket = new Socket("/socket", {params: {token: window.userToken}})
 
@@ -74,6 +75,11 @@ channel.on("maze", maze => {
 channel.on("players", players => {
   let container = document.getElementById("maze-container");
   ReactDOM.render(<Maze maze={window.maze} players={players.players} />, container);
+});
+
+channel.on("request_direction", player => {
+  let directions = ["up", "down", "left", "right"]
+  channel.push("direction", _.sample(directions));
 });
 
 export default socket

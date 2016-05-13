@@ -55,6 +55,11 @@ export default class Maze extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  tick() {
+    window.channel.push("tick", {})
+  }
+
   render() {
     console.log(this.props.maze);
     let maze = this.props.maze.map(row => {
@@ -63,7 +68,7 @@ export default class Maze extends React.Component {
     let players = this.props.players.map(player => <Player {...player[1]}></Player>);
     return (
         <div>
-        <div>{maze}</div>
+        <div onClick={this.tick}>{maze}</div>
         <div>{players}</div>
         <NamePicker />
         </div>
