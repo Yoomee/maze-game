@@ -2,7 +2,10 @@
 .wall { background: black }
 .start { background: hotpink }
 .finish { background: green }
+
 div,h1,h2,h3,p { font-family: 'Dosis', sans-serif; } 
+h1 b { font-weight: 800; text-decoration: underline }
+
 .player {
   border: solid black 1px;
   border-radius: 100%;

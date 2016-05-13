@@ -15,7 +15,7 @@
   <body>
     <div class="container">
       <header class="header">
-        <h1> AMAZEBALLS!!!1!1! </h1>
+        <h1> A<b>MAZE</b>BALLS!!!1!1! </h1>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
