@@ -21,7 +21,7 @@ class Row extends React.Component {
 class Player extends React.Component {
   render() {
     let style = this.props.solved ? {backgroundColor: "lightgreen"} : {};
-    return <div style={style}>{`${this.props.name} - ${this.props.location} - next move: ${this.props.direction}`}</div>
+    return <div style={style}>{`${this.props.name} - ${this.props.location} - next move: ${this.props.direction} - ${this.props.move_count}`}</div>
   }
 }
 
@@ -43,9 +43,9 @@ class NamePicker extends React.Component {
   render() {
     return(
       <div>
-        <form className="playerForm" onSubmit={(e) => this.handleSubmit(e)}>
-          <input type="text" value={this.state.name} onChange={(e) => this.handleNameChange(e)} />
-          <input type="submit" value="Post" />
+        <form className="playerForm" className="form-inline" onSubmit={(e) => this.handleSubmit(e)}>
+          <input type="text" className="form-control" placeholder="name" value={this.state.name} onChange={(e) => this.handleNameChange(e)} />
+          <input type="submit" value="Post" className="btn" />
         </form>
       </div>
     )
@@ -61,6 +61,10 @@ export default class Maze extends React.Component {
     window.channel.push("tick", {})
   }
 
+  startTicker() {
+    window.channel.push("start_ticker", {})
+  }
+
   render() {
     console.log(this.props.maze);
     let maze = this.props.maze.map(row => {
@@ -70,8 +74,10 @@ export default class Maze extends React.Component {
     return (
         <div>
         <div onClick={this.tick}>{maze}</div>
+        <h3>Players</h3>
         <div>{players}</div>
         <NamePicker />
+        <button className="btn btn-primary" onClick={this.startTicker}>Start</button>
         </div>
         );
   }

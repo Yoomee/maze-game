@@ -23,6 +23,12 @@ defmodule MazeGame.MazeChannel do
     {:noreply, socket}
   end
 
+  def handle_in("start_ticker", _payload, socket) do
+    game = MazeGame.Manager.get_game(socket.assigns[:game])
+    MazeGame.Ticker.start_link(game)
+    {:noreply, socket}
+  end
+
   def handle_in("direction", direction, socket) do
     game = MazeGame.Manager.get_game(socket.assigns[:game])
     if Map.has_key?(socket.assigns, :name) do
