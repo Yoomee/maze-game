@@ -20,7 +20,8 @@ class Row extends React.Component {
 
 class Player extends React.Component {
   render() {
-    return <div>{`${this.props.name} - ${this.props.location} - next move: ${this.props.direction}`}</div>
+    let style = this.props.solved ? {backgroundColor: "lightgreen"} : {};
+    return <div style={style}>{`${this.props.name} - ${this.props.location} - next move: ${this.props.direction}`}</div>
   }
 }
 

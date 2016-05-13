@@ -60,16 +60,20 @@ defmodule MazeGame.Game do
   end
 
   defp tick_player(game, player = %Player{direction: direction, location: location, solved: false}) do
-    desired_location = move(direction, location)
-    case enterable_cell?(desired_location) do
-      true -> %{player | location: move(player.direction, player.location), move_count: (player.move_count + 1)}
-      _ -> player
+    case at_end?(location) do
+      true ->
+        %{player | solved: true}
+      false ->
+        desired_location = move(direction, location)
+        case enterable_cell?(desired_location) do
+          true -> %{player | location: move(player.direction, player.location), move_count: (player.move_count + 1)}
+          _ -> player
+        end
     end
   end
   defp tick_player(_game, player), do: player
 
   defp enterable_cell?([x, y]) do
-    IO.puts("desired cell: #{x} #{y}")
     Enum.at(initial_maze, y)
     |> Enum.at(x)
     |> case  do
@@ -78,6 +82,15 @@ defmodule MazeGame.Game do
       :space -> true 
       :start -> true 
       _ -> false
+    end
+  end
+
+  defp at_end?([x, y]) do
+    Enum.at(initial_maze, y)
+    |> Enum.at(x)
+    |> case  do
+      :finish-> true 
+      _ ->false
     end
   end
 
