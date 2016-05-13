@@ -6,6 +6,9 @@
 div,h1,h2,h3,p { font-family: 'Dosis', sans-serif; } 
 h1 b { font-weight: 800; text-decoration: underline }
 
+.header img { max-width: 80%; }
+.header { border-bottom: none; }
+
 .player {
   border: solid black 1px;
   border-radius: 100%;
